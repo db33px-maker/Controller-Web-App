@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#14161C">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Address bar: type a URL, hit Go. Hidden once you're set up if
+             you want more screen space — toggled via the gear button. -->
+        <LinearLayout
+            android:id="@+id/address_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="#1E2028"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/url_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter game URL"
+                android:inputType="textUri"
+                android:imeOptions="actionGo"
+                android:singleLine="true"
+                android:textColor="#F2F2F5"
+                android:textColorHint="#6B6F7B"
+                android:background="#2A2D38"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/go_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Go" />
+
+            <Button
+                android:id="@+id/settings_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="⚙" />
+        </LinearLayout>
+
+        <WebView
+            android:id="@+id/game_webview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Floating badge shown briefly on connect/disconnect and mode changes.
+         Mirrors the extension's toast pattern. -->
+    <TextView
+        android:id="@+id/toast_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:background="#E6141620"
+        android:textColor="#F2F2F5"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:elevation="20dp" />
+
+</FrameLayout>
