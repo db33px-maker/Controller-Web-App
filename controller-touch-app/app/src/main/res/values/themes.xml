@@ -1,6 +1,0 @@
-<resources>
-    <style name="Theme.ControllerToTouch" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:statusBarColor">#14161C</item>
-        <item name="android:windowBackground">#14161C</item>
-    </style>
-</resources>
