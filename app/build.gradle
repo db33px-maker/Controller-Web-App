@@ -29,4 +29,26 @@ android {
 dependencies {
     implementation "androidx.appcompat:appcompat:1.7.0"
     implementation "androidx.webkit:webkit:1.11.0"
+
+    // androidx.appcompat/webkit pull in Kotlin stdlib transitively, and at
+    // least one dependency in that graph drags in the old, pre-1.8
+    // kotlin-stdlib-jdk7/kotlin-stdlib-jdk8 stub artifacts (1.6.21)
+    // alongside a newer kotlin-stdlib (1.8.22) that already contains those
+    // same classes merged in directly. Both ending up on the classpath at
+    // once is what AGP's checkDebugDuplicateClasses task correctly flags.
+    // Forcing one consistent version resolves the whole graph to a single
+    // copy instead of packaging duplicates.
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.24")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.24")
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force "org.jetbrains.kotlin:kotlin-stdlib:1.9.24"
+        force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.24"
+        force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.24"
+    }
 }
